@@ -1,0 +1,11 @@
+const express = require("express");
+const routes = express.Router();
+const CEP = require("../controllers/cepController");
+const Users = require("../controllers/userController");
+const { cepValidation } = require("../middlewares/cepValidation");
+const { checkAccessToken } = require("../middlewares/authenticate");
+const { cacheCep } = require("../middlewares/cacheCep");
+routes.post("/cep/:cep", checkAccessToken, cepValidation, cacheCep, CEP.cep);
+routes.post("/usuarios", Users.createUser);
+routes.post("/login", Users.userLogin);
+module.exports = routes;
