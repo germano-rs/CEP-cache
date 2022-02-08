@@ -35,6 +35,7 @@ $ git clone
 $ cd CEP-Cache
 # Instale as dependências
 $ npm install
+# Crie o banco de dados mongo
 # Configure as variáveis de ambiente e salve o arquivo .env-example como .env
 ```
 SERVER_PORT=porta do servidor - padrão 3000
