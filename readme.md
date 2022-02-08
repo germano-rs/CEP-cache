@@ -4,8 +4,8 @@ Esse projeto é uma forma de obter endereço através do CEP.
 
 ## Funcionalidades
 
-[x] Cadastro de usuário e senha em banco MongoDB;
-[x] Login com autenticação JWT;
+[x] Cadastro de usuário e senha em banco MongoDB;  
+[x] Login com autenticação JWT;  
 [x] Acesso a endereço através do envio do CEP:
 
 - é necessário que o usuário esteja autenticado (TOKEN JWT);
@@ -60,17 +60,33 @@ $ npm run dev
 # Criar Usuário
 
 ```
-curl -d '{"userEmail": "email@email.com", "userPassword": "123456"}' -H 'Content-Type: application/json' http://localhost:3000/usuarios
+curl --request POST \
+  --url http://localhost:3000/usuarios \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"userEmail":"email@gmail.com",
+	"userPassword":"123456"
+}'
 ```
 
 # Criar Acesso (Login)
 
 ```
-curl -d '{"userEmail": "email@email.com", "userPassword": "123456"}' -H 'Content-Type: application/json' http://localhost:3000/login
+curl --request POST \
+  --url http://localhost:3000/login \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"userEmail":"email@gmail.com",
+	"userPassword":"123456"
+}'
 ```
+
+###### Será retornado no corpo da resposta um TOKEN JWT que deverá ser enviado no Header da requisição de busca de endereço por cep.
 
 # Pesquisar CEP
 
 ```
-curl -H "Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDQyODgyNDYsImV4cCI6MTY0NDI5MTg0Nn0.2RL0DjoW6wFPD5RmKDFATzWVSCqioP5Z1XwTCuX5r9w http://localhost:3000/cep/35796-048
+curl --request POST \
+  --url http://localhost:3000/cep/35796048 \
+  --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDQyODgyNDYsImV4cCI6MTY0NDI5MTg0Nn0.2RL0DjoW6wFPD5RmKDFATzWVSCqioP5Z1XwTCuX5r9w'
 ```
